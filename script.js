@@ -129,7 +129,7 @@ function renderUI() {
     explanationPanel.classList.add("hidden");
   } else {
     explanationPanel.classList.remove("hidden");
-    renderDebugChips();
+    renderDebugChips(); // <--- THIS WAS CALLING A MISSING FUNCTION
     
     if (inclusiveMode) {
       explanationText.innerHTML = `
@@ -144,7 +144,7 @@ function renderUI() {
     }
   }
 
-  // 2. Render Grid
+
   recipesGrid.innerHTML = "";
   
   if(visibleRecipes.length === 0) {
@@ -189,9 +189,20 @@ function renderUI() {
   });
 }
 
+function renderDebugChips() {
+  chipsContainer.innerHTML = "";
+  const counts = Object.entries(cuisineCounts).sort((a,b) => b[1] - a[1]);
+  
+  counts.forEach(([cuisine, count], idx) => {
+    const chip = document.createElement("span");
+    chip.className = "chip" + (idx === 0 ? " active" : "");
+    chip.textContent = `${cuisine}: ${count}`;
+    chipsContainer.appendChild(chip);
+  });
+}
+
 
 // Interaction Handlers
-
 window.handleCook = (cuisine) => {
   cuisineCounts[cuisine] = (cuisineCounts[cuisine] || 0) + 1;
   renderUI();
