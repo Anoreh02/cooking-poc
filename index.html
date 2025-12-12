@@ -4,11 +4,300 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BiteWise - Inclusivity Demo</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
+
+  <!-- ============================
+       INLINE CSS (FROM style.css)
+       ============================ -->
+  <style>
+    :root {
+      --primary: #B82727;       
+      --primary-light: #fff5f5; 
+      --success: #5cb85c;      
+      --text-dark: #333333;
+      --text-gray: #555555;
+      --bg-body: #f2f2f2;
+      --bg-card: #ffffff;
+      --border-radius: 15px;    
+      --shadow: 0 2px 4px rgba(0,0,0,0.1);
+      --font-main: 'Roboto', -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: var(--font-main);
+      background-color: var(--bg-body);
+      color: var(--text-dark);
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      padding-bottom: 80px;
+    }
+
+    .app-header {
+      background: white;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .header-content {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .sub-logo { font-size: 14px; color: #888; }
+
+    .description-container {
+      margin-top: 15px;
+      margin-bottom: 25px;
+    }
+
+    .description-label {
+      font-size: 22px;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 8px;
+      margin-top: 0;
+    }
+
+    .description-text {
+      font-size: 16px;
+      color: #444;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .details-label {
+      font-size: 20px;
+      font-weight: bold;
+      color: var(--primary);
+      margin-bottom: 15px;
+      margin-top: 0;
+    }
+
+    .highlight-text {
+      color: var(--primary);
+      font-weight: bold;
+    }
+
+    .control-card {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow);
+      border: 1px solid #eee;
+    }
+
+    .control-card.hidden { display: none; }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin: 0;
+    }
+
+    .action-button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: opacity 0.2s;
+      width: 100%;
+    }
+
+    .action-button:active { opacity: 0.8; }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .cancel-style {
+      background-color: #f0f0f0;
+      color: #555;
+      font-size: 16px;
+      padding: 12px;
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 52px;
+      height: 28px;
+      flex-shrink: 0;
+    }
+    .switch input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 34px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+    input:checked + .slider { background-color: var(--success); }
+    input:checked + .slider:before { transform: translateX(24px); }
+
+    .recipes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    .recipe-card {
+      background: white;
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid #eee;
+      transition: transform 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .recipe-card.recommended {
+      border: 2px solid var(--primary);
+      background-color: var(--primary-light);
+    }
+
+    .card-header {
+      padding: 12px 12px 5px 12px;
+      display: flex;
+      flex-direction: column; 
+      align-items: flex-start;
+      gap: 5px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: bold;
+      color: #333;
+      line-height: 1.2;
+    }
+
+    .card-meta {
+      padding: 0 12px 12px 12px;
+      flex: 1;
+    }
+
+    .ingredient-item {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 3px;
+    }
+
+    .substitution-note {
+      font-size: 12px;
+      font-style: italic;
+      color: #777;
+      margin-top: 5px;
+    }
+
+    .card-actions {
+      padding: 12px;
+      border-top: 1px solid #f0f0f0;
+      background: #fafafa;
+    }
+
+    .row { display: flex; align-items: center; }
+    .space-between { justify-content: space-between; }
+    .hidden { display: none; }
+
+    .chips-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      background: #eee;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      color: #333;
+    }
+    .chip.active {
+      background: var(--primary);
+      color: white;
+    }
+
+    .image-wrapper {
+      position: relative;
+      width: 100%;
+      height: 120px; 
+      background-color: #ddd;
+    }
+
+    .recipe-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+    }
+
+    .rec-badge-overlay {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--primary);
+      color: white;
+      font-size: 10px;
+      font-weight: bold;
+      padding: 3px 8px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .card-content {
+      padding: 10px;
+      flex: 1;
+    }
+  </style>
 </head>
+
 <body>
 
   <!-- App Header -->
@@ -21,7 +310,7 @@
 
   <main class="container">
     
-    <!-- Hero Description -->
+    <!-- Description -->
     <div class="description-container">
       <h1 class="description-label">Adaptive Inclusivity</h1>
       <p class="description-text">
@@ -30,53 +319,161 @@
       </p>
     </div>
 
-    <!-- Control Panel (Styled like the Modal/Card) -->
+    <!-- Control Panel -->
     <section class="control-card">
       <div class="row space-between">
         <div>
           <h2 class="modal-title">Inclusive Mode</h2>
-          <p class="ingredient-item" style="margin-top:5px;">
+          <p class="ingredient-item">
             <strong>ON:</strong> Highlights best matches (Ethical).<br>
             <strong>OFF:</strong> Hides other cuisines (Echo Chamber).
           </p>
         </div>
-        
-        <!-- Toggle Switch -->
+
         <label class="switch">
           <input type="checkbox" id="inclusiveToggle" checked />
           <span class="slider"></span>
         </label>
       </div>
 
-      <div style="margin-top: 20px;">
-        <button id="resetBtn" class="action-button cancel-style">
-          Reset History
-        </button>
+      <div style="margin-top:20px;">
+        <button id="resetBtn" class="action-button cancel-style">Reset History</button>
       </div>
     </section>
 
-    <!-- Dynamic Explanation Area (Initially Hidden) -->
+    <!-- Explanation -->
     <section id="explanationPanel" class="control-card hidden">
       <h3 class="details-label">System Insight</h3>
       <p id="explanationText" class="description-text"></p>
-      
-      <!-- Debug Chips -->
-      <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+
+      <div style="margin-top:15px; border-top:1px solid #eee; padding-top:10px;">
         <span class="substitution-note" style="display:block; margin-bottom:5px;">Internal User Model:</span>
         <div class="chips-container" id="chipsContainer"></div>
       </div>
     </section>
 
-    <!-- Recipe Feed -->
-    <section class="feed-section">
+    <!-- Feed -->
+    <section>
       <h3 class="details-label">Your Feed</h3>
-      <div class="recipes-grid" id="recipesGrid">
-        <!-- Cards injected via JS -->
-      </div>
+      <div class="recipes-grid" id="recipesGrid"></div>
     </section>
 
   </main>
 
-  <script src="script.js"></script>
+  <!-- ============================
+       INLINE JS (FROM script.js)
+       ============================ -->
+  <script>
+    // Data (Mock Database)
+    const RECIPES = [
+      {id:"1", name:"Chicken Adobo", cuisine:"Filipino", difficulty:"Easy", isHealthy:false, image:"images/adobo.jpg"},
+      {id:"2", name:"Sinigang na Baboy", cuisine:"Filipino", difficulty:"Medium", isHealthy:true, image:"images/sinigang.jpg"},
+      {id:"3", name:"Sushi Roll", cuisine:"Japanese", difficulty:"Hard", isHealthy:true, image:"images/sushi.jpg"},
+      {id:"4", name:"Ramen", cuisine:"Japanese", difficulty:"Medium", isHealthy:false, image:"images/ramen.jpg"},
+      {id:"5", name:"Spaghetti Bolognese", cuisine:"Italian", difficulty:"Easy", isHealthy:false, image:"images/spaghetti.jpg"},
+      {id:"6", name:"Margherita Pizza", cuisine:"Italian", difficulty:"Medium", isHealthy:false, image:"images/pizza.jpg"},
+      {id:"7", name:"Chicken Curry", cuisine:"Indian", difficulty:"Medium", isHealthy:true, image:"images/curry.jpg"},
+      {id:"8", name:"Chana Masala", cuisine:"Indian", difficulty:"Easy", isHealthy:true, image:"images/chana.jpg"}
+    ];
+
+    // State
+    let cuisineCounts = {};
+    let inclusiveMode = true;
+
+    // DOM
+    const recipesGrid = document.getElementById("recipesGrid");
+    const inclusiveToggle = document.getElementById("inclusiveToggle");
+    const resetBtn = document.getElementById("resetBtn");
+    const explanationPanel = document.getElementById("explanationPanel");
+    const explanationText = document.getElementById("explanationText");
+    const chipsContainer = document.getElementById("chipsContainer");
+
+    // Helpers
+    function getDominantCuisine() {
+      let max = 0, dom = null;
+      for (const [c, n] of Object.entries(cuisineCounts)) {
+        if (n > max) { max = n; dom = c; }
+      }
+      return dom;
+    }
+
+    function renderDebugChips() {
+      chipsContainer.innerHTML = "";
+      const sorted = Object.entries(cuisineCounts).sort((a,b) => b[1]-a[1]);
+      sorted.forEach(([c, n], idx) => {
+        const chip = document.createElement("span");
+        chip.className = "chip" + (idx===0 ? " active":"");
+        chip.textContent = `${c}: ${n}`;
+        chipsContainer.appendChild(chip);
+      });
+    }
+
+    function computeVisibleRecipes() {
+      const dom = getDominantCuisine();
+      if (!dom) return RECIPES.slice();
+
+      if (!inclusiveMode) return RECIPES.filter(r => r.cuisine === dom);
+
+      const domList = [], others = [];
+      RECIPES.forEach(r => (r.cuisine===dom ? domList:others).push(r));
+      return domList.concat(others);
+    }
+
+    // Render
+    function renderUI() {
+      const dominant = getDominantCuisine();
+      const visible = computeVisibleRecipes();
+
+      if (!dominant) {
+        explanationPanel.classList.add("hidden");
+      } else {
+        explanationPanel.classList.remove("hidden");
+        renderDebugChips();
+
+        explanationText.innerHTML = inclusiveMode
+          ? `Preference detected: <span class="highlight-text">${dominant}</span>.<br>System is <strong style="color:var(--success)">highlighting</strong> matches but keeping options open.`
+          : `Preference detected: <span class="highlight-text">${dominant}</span>.<br>System has <strong style="color:red">hidden</strong> other cuisines (Echo Chamber).`;
+      }
+
+      recipesGrid.innerHTML = "";
+      visible.forEach(recipe => {
+        const isRec = dominant && recipe.cuisine === dominant;
+        const card = document.createElement("div");
+        card.className = "recipe-card" + (inclusiveMode && isRec ? " recommended" : "");
+        card.innerHTML = `
+          <div class="image-wrapper">
+            <img src="${recipe.image}" class="recipe-image" alt="${recipe.name}" />
+            ${inclusiveMode && isRec ? `<span class="rec-badge-overlay">Best Match</span>` : ""}
+          </div>
+
+          <div class="card-content">
+            <div class="card-header"><span class="card-title">${recipe.name}</span></div>
+            <div class="card-meta">
+              <div class="ingredient-item">• ${recipe.cuisine} | ${recipe.difficulty}</div>
+              <div class="substitution-note">${recipe.isHealthy ? "Healthier option":"Comfort food"}</div>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button class="action-button btn-primary" onclick="handleCook('${recipe.cuisine}')">Cook This</button>
+          </div>
+        `;
+        recipesGrid.appendChild(card);
+      });
+    }
+
+    // Handlers
+    window.handleCook = cuisine => {
+      cuisineCounts[cuisine] = (cuisineCounts[cuisine] || 0) + 1;
+      renderUI();
+    };
+
+    resetBtn.addEventListener("click", () => { cuisineCounts = {}; renderUI(); });
+    inclusiveToggle.addEventListener("change", () => { inclusiveMode = inclusiveToggle.checked; renderUI(); });
+
+    // Init
+    renderUI();
+  </script>
+
 </body>
 </html>
