@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BiteWise - Inclusivity Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- App Header -->
+  <div class="app-header">
+    <div class="header-content">
+      <div class="logo">BiteWise</div>
+      <div class="sub-logo">Ethical Design PoC</div>
+    </div>
+  </div>
+
+  <main class="container">
+    
+    <!-- Hero Description -->
+    <div class="description-container">
+      <h1 class="description-label">Adaptive Inclusivity</h1>
+      <p class="description-text">
+        This prototype demonstrates how to prevent algorithmic exclusion using 
+        <span class="highlight-text">Ethical Highlighting</span> instead of hiding choices.
+      </p>
+    </div>
+
+    <!-- Control Panel (Styled like the Modal/Card) -->
+    <section class="control-card">
+      <div class="row space-between">
+        <div>
+          <h2 class="modal-title">Inclusive Mode</h2>
+          <p class="ingredient-item" style="margin-top:5px;">
+            <strong>ON:</strong> Highlights best matches (Ethical).<br>
+            <strong>OFF:</strong> Hides other cuisines (Echo Chamber).
+          </p>
+        </div>
+        
+        <!-- Toggle Switch -->
+        <label class="switch">
+          <input type="checkbox" id="inclusiveToggle" checked />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div style="margin-top: 20px;">
+        <button id="resetBtn" class="action-button cancel-style">
+          Reset History
+        </button>
+      </div>
+    </section>
+
+    <!-- Dynamic Explanation Area (Initially Hidden) -->
+    <section id="explanationPanel" class="control-card hidden">
+      <h3 class="details-label">System Insight</h3>
+      <p id="explanationText" class="description-text"></p>
+      
+      <!-- Debug Chips -->
+      <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+        <span class="substitution-note" style="display:block; margin-bottom:5px;">Internal User Model:</span>
+        <div class="chips-container" id="chipsContainer"></div>
+      </div>
+    </section>
+
+    <!-- Recipe Feed -->
+    <section class="feed-section">
+      <h3 class="details-label">Your Feed</h3>
+      <div class="recipes-grid" id="recipesGrid">
+        <!-- Cards injected via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
